@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Executivo · Capacity & Alocação Q1 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg-card: #13131a;
+  --bg-card-2: #1a1a24;
+  --border: #1e1e2a;
+  --border-2: #2a2a3a;
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --text-faint: #64748b;
+  --pink: #ec4899;
+  --purple: #8b5cf6;
+  --cyan: #06b6d4;
+  --emerald: #10b981;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --blue: #3b82f6;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  font-size: 14px;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(236, 72, 153, 0.06) 0%, transparent 35%),
+    radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 40%);
+  min-height: 100vh;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 32px 24px 80px; }
+
+/* Header */
+.header { margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+.header-top { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
+.header h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 800;
+  font-size: 42px;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.header h1 em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 50%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.header .subtitle { color: var(--text-dim); font-size: 13px; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+.period-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, rgba(236,72,153,0.1), rgba(139,92,246,0.1));
+  border: 1px solid rgba(139,92,246,0.3);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.period-badge::before { content: ''; width: 6px; height: 6px; background: var(--emerald); border-radius: 50%; box-shadow: 0 0 10px var(--emerald); }
+
+/* Section */
+.section { margin-bottom: 48px; }
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 24px;
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+.section-subtitle {
+  color: var(--text-faint);
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+
+/* KPIs */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.kpi {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.kpi:hover { border-color: var(--border-2); transform: translateY(-2px); }
+.kpi::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--accent, var(--pink));
+}
+.kpi-label {
+  font-size: 11px;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.kpi-value {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 36px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--accent, var(--pink));
+}
+.kpi-sub { font-size: 11px; color: var(--text-dim); margin-top: 6px; font-family: 'JetBrains Mono', monospace; }
+.kpi-trend { display: inline-block; margin-left: 6px; font-size: 11px; }
+
+/* Card */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.card-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; flex-wrap: wrap; gap: 8px; }
+.card-title { font-weight: 600; font-size: 15px; }
+.card-meta { font-size: 11px; color: var(--text-faint); font-family: 'JetBrains Mono', monospace; }
+
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 16px; }
+
+/* Bar chart custom */
+.bar-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+.bar-label { width: 180px; font-size: 12px; color: var(--text-dim); flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-track { flex: 1; height: 24px; background: rgba(255,255,255,0.03); border-radius: 4px; overflow: hidden; position: relative; }
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--bar-color, var(--cyan)), color-mix(in srgb, var(--bar-color, var(--cyan)) 60%, transparent));
+  border-radius: 4px;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+.bar-value { width: 80px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+
+/* Heatmap */
+.heatmap { width: 100%; border-collapse: separate; border-spacing: 3px; font-size: 11px; }
+.heatmap th, .heatmap td { padding: 8px; text-align: center; border-radius: 4px; }
+.heatmap th { font-weight: 600; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+.heatmap td.label { text-align: left; color: var(--text); font-weight: 500; padding-left: 12px; font-size: 12px; background: rgba(255,255,255,0.02); }
+.heatmap td.cell { font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+
+/* Stacked monthly bars */
+.stack-chart { display: flex; gap: 16px; align-items: flex-end; min-height: 280px; padding: 20px 0; }
+.stack-month { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 0; }
+.stack-bar-wrap { width: 100%; max-width: 120px; height: 240px; display: flex; flex-direction: column-reverse; gap: 1px; position: relative; }
+.stack-segment { width: 100%; border-radius: 2px; min-height: 1px; transition: all 0.3s; cursor: pointer; }
+.stack-segment:hover { filter: brightness(1.3); transform: scaleX(1.05); }
+.stack-month-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); }
+.stack-month-total { font-family: 'Fraunces', serif; font-weight: 700; font-size: 18px; }
+.stack-capacity-line { position: absolute; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.4); border-top: 1px dashed rgba(255,255,255,0.5); }
+.stack-capacity-line::after { content: 'Capacity'; position: absolute; right: 4px; top: -16px; font-size: 9px; color: var(--text-faint); font-family: 'JetBrains Mono', monospace; }
+
+/* Legend */
+.legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-dim); }
+.legend-swatch { width: 10px; height: 10px; border-radius: 2px; }
+
+/* Status pills */
+.pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 100px; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; }
+.pill-good { background: rgba(16, 185, 129, 0.15); color: var(--emerald); }
+.pill-warn { background: rgba(245, 158, 11, 0.15); color: var(--amber); }
+.pill-bad { background: rgba(239, 68, 68, 0.15); color: var(--red); }
+.pill-info { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
+
+/* Insight cards */
+.insights { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.insight {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  position: relative;
+  overflow: hidden;
+}
+.insight-icon { font-family: 'Fraunces', serif; font-size: 32px; line-height: 1; color: var(--accent); opacity: 0.4; position: absolute; top: 16px; right: 20px; font-weight: 800; }
+.insight-tag { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent, var(--pink)); font-weight: 700; margin-bottom: 8px; font-family: 'JetBrains Mono', monospace; }
+.insight-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 18px; margin-bottom: 8px; line-height: 1.2; }
+.insight-text { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+.insight-text strong { color: var(--text); font-weight: 600; }
+
+/* Tables */
+table.data { width: 100%; border-collapse: collapse; font-size: 12px; }
+table.data th {
+  text-align: left; padding: 10px 12px;
+  font-weight: 600; color: var(--text-faint);
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border);
+}
+table.data td { padding: 12px; border-bottom: 1px solid var(--border); }
+table.data tr:last-child td { border-bottom: none; }
+table.data tr:hover { background: rgba(255,255,255,0.02); }
+.role-badge { padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+
+@media print {
+  body { background: white; color: black; }
+  .container { max-width: none; padding: 16px; }
+  .card, .kpi { border: 1px solid #ddd; background: white; box-shadow: none; }
+  .header h1 { color: black; -webkit-text-fill-color: black; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-top">
+    <div>
+      <h1>Capacity & <em>Alocação</em><br/>Q1 2026 + Abril</h1>
+      <p class="subtitle">Reporte executivo · Pipeline e produtividade da equipe técnica</p>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+      <div class="period-badge">JAN — ABR · 2026</div>
+      <div style="font-size: 11px; color: var(--text-faint); font-family: 'JetBrains Mono', monospace;" id="genDate"></div>
+    </div>
+  </div>
+</header>
+
+<!-- SECTION 1: KPIs -->
+<section class="section">
+  <h2 class="section-title">Indicadores-chave</h2>
+  <p class="section-subtitle">Snapshot do período · Visão consolidada</p>
+  <div class="kpi-grid" id="kpiGrid"></div>
+</section>
+
+<!-- SECTION 2: Capacity vs Alocação -->
+<section class="section">
+  <h2 class="section-title">Ocupação mensal vs <em style="font-style: italic; color: var(--cyan);">capacity</em></h2>
+  <p class="section-subtitle">Horas reportadas por mês contra a capacidade efetiva da equipe</p>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Distribuição mensal por papel</div>
+      <div class="card-meta">Linha tracejada = capacity total da equipe (horas úteis × headcount)</div>
+    </div>
+    <div class="stack-chart" id="stackChart"></div>
+    <div class="legend">
+      <div class="legend-item"><span class="legend-swatch" style="background:#ec4899"></span>DEV</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:#8b5cf6"></span>PM</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:#06b6d4"></span>QA</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:#f59e0b"></span>Tech Leader</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: Top projetos -->
+<section class="section">
+  <h2 class="section-title">Distribuição por <em style="color: var(--pink);">projeto</em></h2>
+  <p class="section-subtitle">Ranking de horas reportadas no período</p>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Top 12 projetos por horas reportadas</div>
+        <div class="card-meta">Total Q1 + Abril</div>
+      </div>
+      <div id="projectBars"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Concentração de esforço</div>
+        <div class="card-meta">% do total alocado</div>
+      </div>
+      <div id="concentration"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: Heatmap profissional x mês -->
+<section class="section">
+  <h2 class="section-title">Performance individual</h2>
+  <p class="section-subtitle">Horas reportadas por profissional por mês — leitura de carga e ociosidade</p>
+  <div class="card">
+    <div style="overflow-x: auto;">
+      <table class="heatmap" id="heatmapTable"></table>
+    </div>
+    <p style="font-size: 11px; color: var(--text-faint); margin-top: 12px; font-family: 'JetBrains Mono', monospace;">Saturação da cor reflete intensidade de horas. Capacity referência: 168h/mês (Brasil/Argentina) e 160h (Colômbia).</p>
+  </div>
+</section>
+
+<!-- SECTION 5: Insights -->
+<section class="section">
+  <h2 class="section-title">Diagnóstico executivo</h2>
+  <p class="section-subtitle">Pontos de atenção e oportunidades identificados</p>
+  <div class="insights" id="insightsContainer"></div>
+</section>
+
+<!-- SECTION 6: Detalhe alocação -->
+<section class="section">
+  <h2 class="section-title">Alocação detalhada</h2>
+  <p class="section-subtitle">Horas por profissional × projeto × mês</p>
+  <div class="card" style="overflow-x: auto;">
+    <table class="data" id="detailTable"></table>
+  </div>
+</section>
+
+</div>
+
+<script>
+const DATA = {
+  "meses": [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril"
+  ],
+  "capacityPais": {
+    "Janeiro": {
+      "Brazil": 168,
+      "Argentina": 168,
+      "Colombia": 160
+    },
+    "Fevereiro": {
+      "Brazil": 140,
+      "Argentina": 136,
+      "Colombia": 160
+    },
+    "Marco": {
+      "Brazil": 176,
+      "Argentina": 160,
+      "Colombia": 168
+    },
+    "Abril": {
+      "Brazil": 168,
+      "Argentina": 168,
+      "Colombia": 160
+    }
+  },
+  "equipe": [
+    {
+      "nome": "Dayana Orduz",
+      "role": "PM",
+      "pais": "Colombia"
+    },
+    {
+      "nome": "Diego Menna",
+      "role": "PM",
+      "pais": "Argentina"
+    },
+    {
+      "nome": "Juan Carlos Valencia Panchana",
+      "role": "Tech Leader",
+      "pais": "Colombia"
+    },
+    {
+      "nome": "Gustavo Buratto Neves",
+      "role": "DEV",
+      "pais": "Argentina"
+    },
+    {
+      "nome": "Nilo Marcos de Freitas",
+      "role": "DEV",
+      "pais": "Brazil"
+    },
+    {
+      "nome": "Wellington Rocha",
+      "role": "DEV",
+      "pais": "Brazil"
+    },
+    {
+      "nome": "José Gabriel Rubio Jojoa",
+      "role": "DEV",
+      "pais": "Colombia"
+    },
+    {
+      "nome": "Fernando Von Muhlinen",
+      "role": "QA",
+      "pais": "Brazil"
+    },
+    {
+      "nome": "Irailton Oliveira Reis",
+      "role": "DEV",
+      "pais": "Brazil"
+    },
+    {
+      "nome": "Cintia Helena Ferreira Segovia",
+      "role": "DEV",
+      "pais": "Brazil"
+    }
+  ],
+  "projetos": [
+    {
+      "nome": "Aceleradores",
+      "horas": {
+        "Janeiro": 9.0,
+        "Fevereiro": 7.0,
+        "Março": 0.0,
+        "Abril": 0.0
+      },
+      "total": 16.0
+    },
+    {
+      "nome": "Banco de joyas AR",
+      "horas": {
+        "Janeiro": 15.0,
+        "Fevereiro": 60.5,
+        "Março": 256.8,
+        "Abril": 10.0
+      },
+      "total": 342.3
+    },
+    {
+      "nome": "CORREIOS BR- IFC BR",
+      "horas": {
+        "Janeiro": 10.5,
+        "Fevereiro": 35.0,
+        "Março": 0.0,
+        "Abril": 0.0
+      },
+      "total": 45.5
+    },
+    {
+      "nome": "Coca Cola BR",
+      "horas": {
+        "Janeiro": 0.0,
+        "Fevereiro": 0.0,
+        "Março": 33.5,
+        "Abril": 92.8
+      },
+      "total": 126.3
+    },
+    {
+      "nome": "El Tasador AR",
+      "horas": {
+        "Janeiro": 497.2,
+        "Fevereiro": 281.3,
+        "Março": 36.0,
+        "Abril": 0.0
+      },
+      "total": 814.5
+    },
+    {
+      "nome": "Ferragamo BR",
+      "horas": {
+        "Janeiro": 1.0,
+        "Fevereiro": 100.2,
+        "Março": 453.6,
+        "Abril": 203.5
+      },
+      "total": 758.3000000000001
+    },
+    {
+      "nome": "Goodyear - IFC BR (Adobe)",
+      "horas": {
+        "Janeiro": 34.0,
+        "Fevereiro": 42.5,
+        "Março": 40.0,
+        "Abril": 1.0
+      },
+      "total": 117.5
+    },
+    {
+      "nome": "Leiva Joyas",
+      "horas": {
+        "Janeiro": 0.0,
+        "Fevereiro": 0.0,
+        "Março": 0.0,
+        "Abril": 96.0
+      },
+      "total": 96.0
+    },
+    {
+      "nome": "Nars - IFC BR",
+      "horas": {
+        "Janeiro": 2.0,
+        "Fevereiro": 0.0,
+        "Março": 0.0,
+        "Abril": 0.0
+      },
+      "total": 2.0
+    },
+    {
+      "nome": "SHI REL B2C - IFC BR",
+      "horas": {
+        "Janeiro": 34.0,
+        "Fevereiro": 40.0,
+        "Março": 7.0,
+        "Abril": 0.0
+      },
+      "total": 81.0
+    },
+    {
+      "nome": "SW BR - IFC BR",
+      "horas": {
+        "Janeiro": 143.8,
+        "Fevereiro": 43.0,
+        "Março": 35.0,
+        "Abril": 0.0
+      },
+      "total": 221.8
+    },
+    {
+      "nome": "SW CL - IFC BR",
+      "horas": {
+        "Janeiro": 20.0,
+        "Fevereiro": 0.0,
+        "Março": 0.0,
+        "Abril": 0.0
+      },
+      "total": 20.0
+    }
+  ],
+  "alocacaoDetalhe": [
+    {
+      "profissional": "Cintia Helena Ferreira Segovia",
+      "role": "DEV",
+      "projeto": "CORREIOS BR- IFC BR",
+      "janeiro": 0.5,
+      "fevereiro": 0.0,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Dayana Orduz",
+      "role": "PM",
+      "projeto": "Banco de joyas AR",
+      "janeiro": 0.0,
+      "fevereiro": 10.0,
+      "marco": 50.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Dayana Orduz",
+      "role": "PM",
+      "projeto": "CORREIOS BR- IFC BR",
+      "janeiro": 0.0,
+      "fevereiro": 35.0,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Dayana Orduz",
+      "role": "PM",
+      "projeto": "El Tasador AR",
+      "janeiro": 40.0,
+      "fevereiro": 20.0,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Dayana Orduz",
+      "role": "PM",
+      "projeto": "Ferragamo BR",
+      "janeiro": 1.0,
+      "fevereiro": 50.0,
+      "marco": 35.0,
+      "abril": 10.0
+    },
+    {
+      "profissional": "Dayana Orduz",
+      "role": "PM",
+      "projeto": "SHI REL B2C - IFC BR",
+      "janeiro": 0.0,
+      "fevereiro": 0.0,
+      "marco": 7.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Diego Menna",
+      "role": "PM",
+      "projeto": "Banco de joyas AR",
+      "janeiro": 0.0,
+      "fevereiro": 30.0,
+      "marco": 58.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Diego Menna",
+      "role": "PM",
+      "projeto": "CORREIOS BR- IFC BR",
+      "janeiro": 1.0,
+      "fevereiro": 0.0,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Diego Menna",
+      "role": "PM",
+      "projeto": "Coca Cola BR",
+      "janeiro": 0.0,
+      "fevereiro": 0.0,
+      "marco": 12.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Diego Menna",
+      "role": "PM",
+      "projeto": "El Tasador AR",
+      "janeiro": 0.5,
+      "fevereiro": 0.0,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Diego Menna",
+      "role": "PM",
+      "projeto": "Goodyear - IFC BR (Adobe)",
+      "janeiro": 34.0,
+      "fevereiro": 42.5,
+      "marco": 40.0,
+      "abril": 1.0
+    },
+    {
+      "profissional": "Diego Menna",
+      "role": "PM",
+      "projeto": "Nars - IFC BR",
+      "janeiro": 2.0,
+      "fevereiro": 0.0,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Diego Menna",
+      "role": "PM",
+      "projeto": "SHI REL B2C - IFC BR",
+      "janeiro": 34.0,
+      "fevereiro": 40.0,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Diego Menna",
+      "role": "PM",
+      "projeto": "SW BR - IFC BR",
+      "janeiro": 89.8,
+      "fevereiro": 31.0,
+      "marco": 35.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Diego Menna",
+      "role": "PM",
+      "projeto": "SW CL - IFC BR",
+      "janeiro": 20.0,
+      "fevereiro": 0.0,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Fernando Von Muhlinen",
+      "role": "QA",
+      "projeto": "Banco de joyas AR",
+      "janeiro": 0.0,
+      "fevereiro": 0.0,
+      "marco": 5.5,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Fernando Von Muhlinen",
+      "role": "QA",
+      "projeto": "El Tasador AR",
+      "janeiro": 89.0,
+      "fevereiro": 56.5,
+      "marco": 12.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Fernando Von Muhlinen",
+      "role": "QA",
+      "projeto": "Ferragamo BR",
+      "janeiro": 0.0,
+      "fevereiro": 0.0,
+      "marco": 76.8,
+      "abril": 29.5
+    },
+    {
+      "profissional": "Gustavo Buratto Neves",
+      "role": "DEV",
+      "projeto": "Banco de joyas AR",
+      "janeiro": 15.0,
+      "fevereiro": 20.5,
+      "marco": 128.0,
+      "abril": 10.0
+    },
+    {
+      "profissional": "Gustavo Buratto Neves",
+      "role": "DEV",
+      "projeto": "El Tasador AR",
+      "janeiro": 155.0,
+      "fevereiro": 123.5,
+      "marco": 23.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Gustavo Buratto Neves",
+      "role": "DEV",
+      "projeto": "Leiva Joyas",
+      "janeiro": 0.0,
+      "fevereiro": 0.0,
+      "marco": 0.0,
+      "abril": 96.0
+    },
+    {
+      "profissional": "Irailton Oliveira Reis",
+      "role": "DEV",
+      "projeto": "SW BR - IFC BR",
+      "janeiro": 47.0,
+      "fevereiro": 0.0,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "José Gabriel Rubio Jojoa",
+      "role": "DEV",
+      "projeto": "Aceleradores",
+      "janeiro": 7.0,
+      "fevereiro": 7.0,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "José Gabriel Rubio Jojoa",
+      "role": "DEV",
+      "projeto": "CORREIOS BR- IFC BR",
+      "janeiro": 2.0,
+      "fevereiro": 0.0,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "José Gabriel Rubio Jojoa",
+      "role": "DEV",
+      "projeto": "El Tasador AR",
+      "janeiro": 41.2,
+      "fevereiro": 26.2,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "José Gabriel Rubio Jojoa",
+      "role": "DEV",
+      "projeto": "Ferragamo BR",
+      "janeiro": 0.0,
+      "fevereiro": 45.8,
+      "marco": 126.0,
+      "abril": 128.0
+    },
+    {
+      "profissional": "José Gabriel Rubio Jojoa",
+      "role": "DEV",
+      "projeto": "SW BR - IFC BR",
+      "janeiro": 7.0,
+      "fevereiro": 12.0,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Juan Carlos Valencia Panchana",
+      "role": "Tech Leader",
+      "projeto": "Aceleradores",
+      "janeiro": 2.0,
+      "fevereiro": 0.0,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Juan Carlos Valencia Panchana",
+      "role": "Tech Leader",
+      "projeto": "CORREIOS BR- IFC BR",
+      "janeiro": 7.0,
+      "fevereiro": 0.0,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Juan Carlos Valencia Panchana",
+      "role": "Tech Leader",
+      "projeto": "El Tasador AR",
+      "janeiro": 21.0,
+      "fevereiro": 0.0,
+      "marco": 0.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Nilo Marcos de Freitas",
+      "role": "DEV",
+      "projeto": "Banco de joyas AR",
+      "janeiro": 0.0,
+      "fevereiro": 0.0,
+      "marco": 15.3,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Nilo Marcos de Freitas",
+      "role": "DEV",
+      "projeto": "Coca Cola BR",
+      "janeiro": 0.0,
+      "fevereiro": 0.0,
+      "marco": 21.5,
+      "abril": 92.8
+    },
+    {
+      "profissional": "Nilo Marcos de Freitas",
+      "role": "DEV",
+      "projeto": "Ferragamo BR",
+      "janeiro": 0.0,
+      "fevereiro": 0.0,
+      "marco": 80.9,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Wellington Rocha",
+      "role": "DEV",
+      "projeto": "El Tasador AR",
+      "janeiro": 150.5,
+      "fevereiro": 55.1,
+      "marco": 1.0,
+      "abril": 0.0
+    },
+    {
+      "profissional": "Wellington Rocha",
+      "role": "DEV",
+      "projeto": "Ferragamo BR",
+      "janeiro": 0.0,
+      "fevereiro": 4.5,
+      "marco": 135.0,
+      "abril": 36.0
+    }
+  ],
+  "horasProfissional": [
+    {
+      "profissional": "Cintia Helena Ferreira Segovia",
+      "role": "DEV",
+      "janeiro": 0.5,
+      "fevereiro": 0.0,
+      "marco": 0.0,
+      "abril": 0.0,
+      "total": 0.5
+    },
+    {
+      "profissional": "Dayana Orduz",
+      "role": "PM",
+      "janeiro": 41.0,
+      "fevereiro": 115.0,
+      "marco": 92.0,
+      "abril": 10.0,
+      "total": 258.0
+    },
+    {
+      "profissional": "Diego Menna",
+      "role": "PM",
+      "janeiro": 181.2,
+      "fevereiro": 143.5,
+      "marco": 145.0,
+      "abril": 1.0,
+      "total": 470.7
+    },
+    {
+      "profissional": "Fernando Von Muhlinen",
+      "role": "QA",
+      "janeiro": 89.0,
+      "fevereiro": 56.5,
+      "marco": 94.2,
+      "abril": 29.5,
+      "total": 269.2
+    },
+    {
+      "profissional": "Gustavo Buratto Neves",
+      "role": "DEV",
+      "janeiro": 170.0,
+      "fevereiro": 144.0,
+      "marco": 151.0,
+      "abril": 106.0,
+      "total": 571.0
+    },
+    {
+      "profissional": "Irailton Oliveira Reis",
+      "role": "DEV",
+      "janeiro": 47.0,
+      "fevereiro": 0.0,
+      "marco": 0.0,
+      "abril": 0.0,
+      "total": 47.0
+    },
+    {
+      "profissional": "José Gabriel Rubio Jojoa",
+      "role": "DEV",
+      "janeiro": 57.2,
+      "fevereiro": 91.0,
+      "marco": 126.0,
+      "abril": 128.0,
+      "total": 402.2
+    },
+    {
+      "profissional": "Juan Carlos Valencia Panchana",
+      "role": "Tech Leader",
+      "janeiro": 30.0,
+      "fevereiro": 0.0,
+      "marco": 0.0,
+      "abril": 0.0,
+      "total": 30.0
+    },
+    {
+      "profissional": "Nilo Marcos de Freitas",
+      "role": "DEV",
+      "janeiro": 0.0,
+      "fevereiro": 0.0,
+      "marco": 117.8,
+      "abril": 92.8,
+      "total": 210.6
+    },
+    {
+      "profissional": "Wellington Rocha",
+      "role": "DEV",
+      "janeiro": 150.5,
+      "fevereiro": 59.6,
+      "marco": 136.0,
+      "abril": 36.0,
+      "total": 382.1
+    }
+  ]
+};
+
+document.getElementById('genDate').textContent = 'Gerado em ' + new Date().toLocaleString('pt-BR');
+
+const ROLE_COLOR = { 'DEV': '#ec4899', 'PM': '#8b5cf6', 'QA': '#06b6d4', 'Tech Leader': '#f59e0b' };
+const MESES = ['Janeiro', 'Fevereiro', 'Março', 'Abril'];
+const MESES_KEY = ['janeiro', 'fevereiro', 'marco', 'abril'];
+
+// ============ CAPACITY TOTAL POR MÊS ============
+function capacityMes(mes) {
+  // 168h/mês padrão para cada um dos 8 ativos do core team (excluindo Irailton/Cintia que não estão no Estudo Capacity)
+  // Mas vamos somar capacity real por país por profissional ativo
+  const capPais = DATA.capacityPais[mes === 'Março' ? 'Marco' : mes];
+  let total = 0;
+  DATA.equipe.forEach(p => {
+    total += capPais[p.pais] || 168;
+  });
+  return total;
+}
+
+// ============ KPIs ============
+function renderKPIs() {
+  const totalH = DATA.horasProfissional.reduce((a,p) => a + p.total, 0);
+  const totalCap = MESES.reduce((a,m) => a + capacityMes(m), 0);
+  const ocup = (totalH / totalCap) * 100;
+  const projAtivos = DATA.projetos.filter(p => p.total > 0).length;
+  const headcount = DATA.equipe.length;
+
+  // Mês mais carregado
+  const horasMes = MESES_KEY.map((mk, i) => ({
+    mes: MESES[i],
+    horas: DATA.horasProfissional.reduce((a,p) => a + p[mk], 0)
+  }));
+  const mesMax = horasMes.reduce((a,b) => a.horas > b.horas ? a : b);
+  const mesMin = horasMes.reduce((a,b) => a.horas < b.horas ? a : b);
+
+  // Top profissional
+  const topProf = [...DATA.horasProfissional].sort((a,b) => b.total - a.total)[0];
+
+  // Variação
+  const queda = ((mesMax.horas - mesMin.horas) / mesMax.horas * 100).toFixed(0);
+
+  const kpis = [
+    { label: 'Horas reportadas', value: totalH.toFixed(0) + 'h', sub: 'Janeiro a Abril', accent: '#ec4899' },
+    { label: 'Capacity total', value: totalCap.toLocaleString('pt-BR') + 'h', sub: headcount + ' profissionais × 4 meses', accent: '#8b5cf6' },
+    { label: 'Ocupação média', value: ocup.toFixed(1) + '%', sub: ocup < 50 ? 'Abaixo do saudável' : ocup < 70 ? 'Atenção' : 'OK', accent: ocup < 50 ? '#ef4444' : ocup < 70 ? '#f59e0b' : '#10b981' },
+    { label: 'Projetos ativos', value: projAtivos, sub: 'Com horas no período', accent: '#06b6d4' },
+    { label: 'Pico mensal', value: mesMax.horas.toFixed(0) + 'h', sub: mesMax.mes, accent: '#10b981' },
+    { label: 'Vale mensal', value: mesMin.horas.toFixed(0) + 'h', sub: mesMin.mes + ' · queda de ' + queda + '%', accent: '#ef4444' }
+  ];
+
+  document.getElementById('kpiGrid').innerHTML = kpis.map(k => `
+    <div class="kpi" style="--accent:${k.accent}">
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-value">${k.value}</div>
+      <div class="kpi-sub">${k.sub}</div>
+    </div>
+  `).join('');
+}
+
+// ============ STACKED CHART ============
+function renderStackChart() {
+  // Por mês, somar horas por role
+  const dadosMes = MESES_KEY.map((mk, i) => {
+    const byRole = {};
+    DATA.horasProfissional.forEach(p => {
+      byRole[p.role] = (byRole[p.role] || 0) + p[mk];
+    });
+    return {
+      mes: MESES[i],
+      mesKey: mk,
+      byRole,
+      total: Object.values(byRole).reduce((a,b) => a+b, 0),
+      capacity: capacityMes(MESES[i])
+    };
+  });
+
+  const maxVal = Math.max(...dadosMes.map(d => Math.max(d.total, d.capacity)));
+
+  document.getElementById('stackChart').innerHTML = dadosMes.map(d => {
+    const segments = ['DEV', 'PM', 'QA', 'Tech Leader'].map(role => {
+      const val = d.byRole[role] || 0;
+      if (val < 1) return '';
+      const heightPct = (val / maxVal) * 100;
+      return `<div class="stack-segment" style="background:${ROLE_COLOR[role]}; height:${heightPct}%" title="${role}: ${val.toFixed(0)}h"></div>`;
+    }).join('');
+
+    const capPct = (d.capacity / maxVal) * 100;
+    const ocup = (d.total / d.capacity * 100).toFixed(0);
+
+    return `
+      <div class="stack-month">
+        <div class="stack-month-total" style="color:${ocup < 50 ? '#ef4444' : ocup < 70 ? '#f59e0b' : '#10b981'}">${d.total.toFixed(0)}h</div>
+        <div style="font-size:10px; color:var(--text-faint); font-family:'JetBrains Mono'">${ocup}%</div>
+        <div class="stack-bar-wrap">
+          ${segments}
+          <div class="stack-capacity-line" style="bottom:${capPct}%"></div>
+        </div>
+        <div class="stack-month-label">${d.mes}</div>
+        <div style="font-size:10px; color:var(--text-faint); font-family:'JetBrains Mono'">cap ${d.capacity}h</div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ============ PROJECT BARS ============
+function renderProjectBars() {
+  const projs = [...DATA.projetos].filter(p => p.total > 0).sort((a,b) => b.total - a.total);
+  const max = projs[0].total;
+  const colors = ['#ec4899', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#3b82f6', '#ef4444', '#a855f7', '#14b8a6', '#f97316', '#84cc16', '#0ea5e9'];
+
+  document.getElementById('projectBars').innerHTML = projs.map((p, i) => `
+    <div class="bar-row">
+      <div class="bar-label" title="${p.nome}">${p.nome}</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${(p.total/max*100)}%; --bar-color:${colors[i % colors.length]}"></div>
+      </div>
+      <div class="bar-value">${p.total.toFixed(0)}h</div>
+    </div>
+  `).join('');
+}
+
+// ============ CONCENTRATION ============
+function renderConcentration() {
+  const totalH = DATA.projetos.reduce((a,p) => a + p.total, 0);
+  const projs = [...DATA.projetos].filter(p => p.total > 0).sort((a,b) => b.total - a.total);
+  const top3 = projs.slice(0, 3).reduce((a,p) => a + p.total, 0);
+  const top3Pct = (top3 / totalH * 100).toFixed(0);
+  const outrosCount = projs.length - 3;
+  const outrosPct = (100 - top3Pct);
+
+  document.getElementById('concentration').innerHTML = `
+    <div style="display: flex; gap: 4px; height: 32px; border-radius: 6px; overflow: hidden; margin-bottom: 16px;">
+      ${projs.slice(0,3).map((p,i) => {
+        const colors = ['#ec4899', '#8b5cf6', '#06b6d4'];
+        return `<div style="background:${colors[i]}; width:${(p.total/totalH*100)}%; min-width:2px;" title="${p.nome}: ${(p.total/totalH*100).toFixed(0)}%"></div>`;
+      }).join('')}
+      <div style="background:rgba(255,255,255,0.1); flex: 1;" title="Demais projetos"></div>
+    </div>
+    <div style="margin-bottom: 16px;">
+      <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border);">
+        <span style="font-size: 12px; color: var(--text-dim);">Top 3 projetos</span>
+        <span style="font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--pink);">${top3Pct}%</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border);">
+        <span style="font-size: 12px; color: var(--text-dim);">${outrosCount} projetos restantes</span>
+        <span style="font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--text-dim);">${outrosPct}%</span>
+      </div>
+    </div>
+    <div style="font-size: 12px; color: var(--text-faint); padding: 12px; background: rgba(236,72,153,0.05); border-left: 2px solid var(--pink); border-radius: 4px; line-height: 1.6;">
+      <strong style="color: var(--text);">Concentração ${top3Pct >= 70 ? 'crítica' : 'elevada'}:</strong> ${top3Pct}% das horas estão em apenas 3 projetos (${projs.slice(0,3).map(p=>p.nome).join(', ')}). Risco operacional caso um seja interrompido.
+    </div>
+  `;
+}
+
+// ============ HEATMAP ============
+function renderHeatmap() {
+  const profs = [...DATA.horasProfissional].sort((a,b) => b.total - a.total);
+  const max = Math.max(...profs.flatMap(p => [p.janeiro, p.fevereiro, p.marco, p.abril]));
+
+  function cellColor(v) {
+    if (v < 1) return 'background: rgba(255,255,255,0.02); color: var(--text-faint);';
+    const intensity = Math.min(v / max, 1);
+    const alpha = 0.15 + intensity * 0.55;
+    const color = intensity > 0.7 ? `rgba(236, 72, 153, ${alpha})` :
+                  intensity > 0.4 ? `rgba(139, 92, 246, ${alpha})` :
+                  `rgba(6, 182, 212, ${alpha})`;
+    return `background: ${color}; color: ${intensity > 0.5 ? '#fff' : 'var(--text)'};`;
+  }
+
+  let html = `
+    <thead><tr>
+      <th style="text-align:left; padding-left:12px;">Profissional</th>
+      <th>Role</th>
+      <th>País</th>
+      <th>Janeiro</th><th>Fevereiro</th><th>Março</th><th>Abril</th>
+      <th>Total</th>
+      <th>Média</th>
+    </tr></thead><tbody>
+  `;
+
+  profs.forEach(p => {
+    const equipeMatch = DATA.equipe.find(e => e.nome === p.profissional);
+    const pais = equipeMatch ? equipeMatch.pais : '-';
+    const media = (p.total / 4);
+    html += `
+      <tr>
+        <td class="label">${p.profissional}</td>
+        <td><span class="role-badge" style="background:${ROLE_COLOR[p.role]}25; color:${ROLE_COLOR[p.role]}">${p.role}</span></td>
+        <td style="font-size: 11px; color: var(--text-dim);">${pais}</td>
+        <td class="cell" style="${cellColor(p.janeiro)}">${p.janeiro.toFixed(0)}</td>
+        <td class="cell" style="${cellColor(p.fevereiro)}">${p.fevereiro.toFixed(0)}</td>
+        <td class="cell" style="${cellColor(p.marco)}">${p.marco.toFixed(0)}</td>
+        <td class="cell" style="${cellColor(p.abril)}">${p.abril.toFixed(0)}</td>
+        <td class="cell" style="font-weight:700; background: rgba(255,255,255,0.04);">${p.total.toFixed(0)}</td>
+        <td class="cell" style="color: ${media < 60 ? 'var(--red)' : media < 100 ? 'var(--amber)' : 'var(--emerald)'}">${media.toFixed(0)}/m</td>
+      </tr>
+    `;
+  });
+  html += '</tbody>';
+  document.getElementById('heatmapTable').innerHTML = html;
+}
+
+// ============ INSIGHTS ============
+function renderInsights() {
+  const totalH = DATA.horasProfissional.reduce((a,p) => a + p.total, 0);
+  const totalCap = MESES.reduce((a,m) => a + capacityMes(m), 0);
+  const ocup = (totalH / totalCap) * 100;
+  const ociosas = totalCap - totalH;
+
+  const horasMes = MESES_KEY.map((mk, i) => ({
+    mes: MESES[i],
+    horas: DATA.horasProfissional.reduce((a,p) => a + p[mk], 0),
+    capacity: capacityMes(MESES[i])
+  }));
+
+  // Identificar profissionais subutilizados em Abril
+  const subAbril = DATA.horasProfissional.filter(p => p.abril < 80 && p.total > 50).sort((a,b) => a.abril - b.abril);
+  const topProj = [...DATA.projetos].sort((a,b) => b.total - a.total)[0];
+  const top3 = [...DATA.projetos].sort((a,b) => b.total - a.total).slice(0,3);
+  const top3H = top3.reduce((a,p) => a + p.total, 0);
+  const top3Pct = (top3H / totalH * 100).toFixed(0);
+
+  const insights = [
+    {
+      tag: 'Capacity',
+      title: 'Ociosidade significativa de ' + ociosas.toFixed(0) + 'h',
+      text: `A equipe operou a <strong>${ocup.toFixed(0)}% do capacity</strong> no período (Jan-Abr). Isso representa <strong>${ociosas.toFixed(0)} horas não convertidas em projeto</strong> — equivalente a ${(ociosas/168).toFixed(1)} meses-pessoa. Recomenda-se acelerar pipeline de propostas ou reavaliar dimensionamento da equipe.`,
+      accent: '#ef4444'
+    },
+    {
+      tag: 'Tendência',
+      title: 'Queda abrupta em Abril',
+      text: `Abril fechou com <strong>${horasMes[3].horas.toFixed(0)}h</strong> contra ${horasMes[2].horas.toFixed(0)}h em Março — queda de <strong>${((1-horasMes[3].horas/horasMes[2].horas)*100).toFixed(0)}%</strong>. PMs reportaram apenas 11h totais no mês, indicando possível encerramento de ciclos sem sucessão imediata de novos projetos.`,
+      accent: '#f59e0b'
+    },
+    {
+      tag: 'Concentração',
+      title: 'Risco de dependência em 3 projetos',
+      text: `<strong>${top3Pct}% das horas</strong> da equipe foram em ${top3.map(p => p.nome).join(', ')}. Concentração elevada gera risco de receita caso algum seja descontinuado. Diversificar pipeline é prioridade.`,
+      accent: '#ec4899'
+    },
+    {
+      tag: 'Performance',
+      title: 'Top performer: ' + [...DATA.horasProfissional].sort((a,b) => b.total - a.total)[0].profissional.split(' ')[0],
+      text: (() => {
+        const top = [...DATA.horasProfissional].sort((a,b) => b.total - a.total)[0];
+        return `<strong>${top.profissional}</strong> (${top.role}) liderou com <strong>${top.total.toFixed(0)}h</strong> no período (média ${(top.total/4).toFixed(0)}h/mês). Distribuição equilibrada nos 4 meses sugere alocação consistente em projetos âncora.`;
+      })(),
+      accent: '#10b981'
+    },
+    {
+      tag: 'Subutilização',
+      title: subAbril.length + ' profissionais ociosos em Abril',
+      text: subAbril.length > 0 ?
+        `<strong>${subAbril.slice(0,3).map(p => p.profissional.split(' ')[0]).join(', ')}</strong> reportaram menos de 80h em Abril (capacity ~168h). Necessário reativar alocação imediata para evitar custo improdutivo.` :
+        'Todos os profissionais com alocação adequada em Abril.',
+      accent: '#06b6d4'
+    },
+    {
+      tag: 'Recomendação',
+      title: 'Pipeline mínimo necessário',
+      text: `Para ocupar <strong>100% da equipe atual</strong>, são necessários ~<strong>1.344h/mês</strong> em projetos ativos. Atualmente operando com déficit médio de <strong>${(1344 - totalH/4).toFixed(0)}h/mês</strong>. Sugestão: priorizar fechamento de propostas em pipeline e cross-sell em clientes ativos.`,
+      accent: '#8b5cf6'
+    }
+  ];
+
+  document.getElementById('insightsContainer').innerHTML = insights.map((ins, i) => `
+    <div class="insight" style="--accent:${ins.accent}">
+      <span class="insight-icon">${String(i+1).padStart(2, '0')}</span>
+      <div class="insight-tag">${ins.tag}</div>
+      <div class="insight-title">${ins.title}</div>
+      <div class="insight-text">${ins.text}</div>
+    </div>
+  `).join('');
+}
+
+// ============ DETAIL TABLE ============
+function renderDetailTable() {
+  // Ordenar por profissional
+  const sorted = [...DATA.alocacaoDetalhe].sort((a,b) => {
+    const totA = a.janeiro + a.fevereiro + a.marco + a.abril;
+    const totB = b.janeiro + b.fevereiro + b.marco + b.abril;
+    return totB - totA;
+  });
+
+  let html = `<thead><tr>
+    <th>Profissional</th><th>Role</th><th>Projeto</th>
+    <th style="text-align:right">Jan</th>
+    <th style="text-align:right">Fev</th>
+    <th style="text-align:right">Mar</th>
+    <th style="text-align:right">Abr</th>
+    <th style="text-align:right">Total</th>
+  </tr></thead><tbody>`;
+
+  sorted.forEach(r => {
+    const total = r.janeiro + r.fevereiro + r.marco + r.abril;
+    if (total < 1) return;
+    html += `
+      <tr>
+        <td>${r.profissional}</td>
+        <td><span class="role-badge" style="background:${ROLE_COLOR[r.role]}25; color:${ROLE_COLOR[r.role]}">${r.role}</span></td>
+        <td style="color:var(--text-dim)">${r.projeto}</td>
+        <td style="text-align:right; font-family:'JetBrains Mono'">${r.janeiro > 0 ? r.janeiro.toFixed(0) : '—'}</td>
+        <td style="text-align:right; font-family:'JetBrains Mono'">${r.fevereiro > 0 ? r.fevereiro.toFixed(0) : '—'}</td>
+        <td style="text-align:right; font-family:'JetBrains Mono'">${r.marco > 0 ? r.marco.toFixed(0) : '—'}</td>
+        <td style="text-align:right; font-family:'JetBrains Mono'">${r.abril > 0 ? r.abril.toFixed(0) : '—'}</td>
+        <td style="text-align:right; font-family:'JetBrains Mono'; font-weight:700;">${total.toFixed(0)}h</td>
+      </tr>
+    `;
+  });
+  html += '</tbody>';
+  document.getElementById('detailTable').innerHTML = html;
+}
+
+// Render all
+renderKPIs();
+renderStackChart();
+renderProjectBars();
+renderConcentration();
+renderHeatmap();
+renderInsights();
+renderDetailTable();
+</script>
+</body>
+</html>
